@@ -1,14 +1,39 @@
-> _This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) +
-> [backpack-react-scripts](https://github.com/Skyscanner/backpack-react-scripts/tree/master/packages/react-scripts)._
-> It is very similar to one that you would create using [Create React App](https://github.com/facebook/create-react-app)
-> without [backpack-react-scripts](https://github.com/Skyscanner/backpack-react-scripts/tree/master/packages/react-scripts),
-> so please refer to [it's documentation](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md)
-> for more usage information.
 
-# Aadith VK
+# Create a Backpack React web app
 
-[_Add a brief description of your project here._]
+Take the following steps to complete the task:
 
+Set Up Your Workspace
+
+Step One: Create new Backpack application by running the command `npx create-react-app@3.4.1 my-app --scripts-version=@skyscanner/backpack-react-scripts --template @skyscanner/backpack --use-npm` in the terminal.  This process is also described here.
+
+Step Two: Navigate to the newly generated directory. To ensure that the application successfully loads the backpack library, add the following code to the `package.json` file:
+
+```
+"backpack-react-scripts": {   
+   "babelIncludePrefixes": [
+            “@skyscanner[\\/]backpack-web[\\/\bpk-”
+            ]
+},
+```
+
+Step Three: Now, explore the code in the `src` directory. For this task, you’ll primarily be editing the `App.js` file, but you’re welcome to explore the others as well!
+
+Step Four: To view the current application, enter `npm start` into the terminal. Then, navigate to localhost:3000 in your web browser. Once your application is running, you’re ready to start customizing your application!
+
+Customise the Application
+
+Step One: Update the header text to read “Flight Schedule.”
+
+Step Two: Install the Calendar component by running the command `npm install bpk-component-calendar --save-dev`. This is also described in the Calendar documentation.
+
+Step Three: Review the Calendar documentation for usage, and add this feature into your `App.js` file. You can also edit the `App.scss` to adjust the calendar’s appearance.
+
+Step Four: Place the “Click Me” button below the calendar, and update the button’s text to say “Continue.” You can leave the button’s functionality as is.
+
+Step Five: As described above, review your application’s appearance by entering `npm start` in the terminal and then navigating to localhost:3000.
+
+Testing your Application
 ## npm script commands
 
 `backpack-react-scripts` is listed as a `devDependency` in your [package.json](./package.json) and exposes the following npm scripts:
