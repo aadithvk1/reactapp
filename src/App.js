@@ -1,51 +1,108 @@
-import React, { useState } from 'react';
-import BpkButton from '@skyscanner/backpack-web/bpk-component-button';
-import BpkCalendar, {
-  CALENDAR_SELECTION_TYPE,
-} from '@skyscanner/backpack-web/bpk-component-calendar';
+import React, { Component } from 'react';
+import { BpkCode } from 'bpk-component-code';
+import BpkButton from 'bpk-component-button';
+import BpkText from 'bpk-component-text';
+import BpkCalendar, { CALENDAR_SELECTION_TYPE } from 'bpk-component-calendar';
 import format from 'date-fns/format';
-import AppHeader from './AppHeader'; // Assuming AppHeader is a component that renders the header
-import './App.scss';
+import STYLES from './App.scss';
 
-const formatDateFull = (date) => format(date, 'EEEE, do MMMM yyyy');
 
-function App() {
-  const [selectedDate, setSelectedDate] = useState(null);
+const c = className => STYLES[className] || 'UNKNOWN';
+const formatDateFull = date => format(date, 'EEEE, do MMMM yyyy');
+const formatMonth = date => format(date, 'MMMM yyyy');
+const daysOfWeek = [
+  {
+    name: 'Sunday',
+    nameAbbr: 'Sun',
+    index: 0,
+    isWeekend: true,
+  },
+  {
+    name: 'Monday',
+    nameAbbr: 'Mon',
+    index: 1,
+    isWeekend: false,
+  },
+  {
+    name: 'Tuesday',
+    nameAbbr: 'Tues',
+    index: 2,
+    isWeekend: false,
+  },
+  {
+    name: 'Wednesday',
+    nameAbbr: 'Wed',
+    index: 3,
+    isWeekend: false,
+  },
+  {
+    name: 'Thursday',
+    nameAbbr: 'Thur',
+    index: 4,
+    isWeekend: false,
+  },
+  {
+    name: 'Friday',
+    nameAbbr: 'Fri',
+    index: 5,
+    isWeekend: false,
+  },
+  {
+    name: 'Saturday',
+    nameAbbr: 'Sat',
+    index: 6,
+    isWeekend: true,
+  },
+];
 
-  const handleDateSelect = (date) => {
-    setSelectedDate(date);
-  };
 
-  return (
-    <div className="App">
-      <AppHeader /> {/* Renders the default Backpack header, can be customized */}
-      <main className="App__main">
-        <h1 className="App__title">Reservation Date</h1>
+export default class App extends Component {
+  constructor () {
+    super();
 
-        <div className="App__calendar-container">
+    this.state = {
+      selectionConfiguration: {
+        type: CALENDAR_SELECTION_TYPE.single,
+        date: null,
+      }
+    };
+  }
+
+  handleDateSelect = (date) => {
+    this.setState({
+      selectionConfiguration: {
+        type: CALENDAR_SELECTION_TYPE.single,
+        date: date,
+      },
+    });
+  }
+
+  render () {
+    return (
+      <div className={c('App')}>
+      <header className={c('App__header')}>
+        <div className={c('App__header-inner')}>
+          <BpkText tagName="h1" textStyle="xxl" className={c('App__heading')}>Reservation Date</BpkText>
+        </div>
+      </header>
+      <main className={c('App__main')}>
+        <div>
           <BpkCalendar
-            onDateSelect={handleDateSelect}
-            selectionConfiguration={{
-              type: CALENDAR_SELECTION_TYPE.single,
-              date: selectedDate,
-            }}
+            id='calendar'
+            onDateSelect={this.handleDateSelect}
+            formatMonth={formatMonth}
+            formatDateFull={formatDateFull}
+            daysOfWeek={daysOfWeek}
+            weekStartsOn={0}
+            changeMonthLabel="Change month"
+            nextMonthLabel="Next month"
+            previousMonthLabel="Previous month"
+            selectionConfiguration={this.state.selectionConfiguration}
           />
-        </div>
-
-        <div className="App__button-container">
-          <BpkButton onClick={() => console.log('Continue clicked!', selectedDate)}>
-            Continue
-          </BpkButton>
-        </div>
-
-        {selectedDate && (
-          <p className="App__selected-date">
-            Selected Date: {formatDateFull(selectedDate)}
-          </p>
-        )}
+          </div>
+        <BpkButton onClick={() => alert('It works!')}>Continue</BpkButton>
       </main>
     </div>
-  );
+    )
+  }
 }
-
-export default App;
