@@ -1,0 +1,47 @@
+@import '~@skyscanner/backpack-web/bpk-mixins/animations';
+@import '~@skyscanner/backpack-web/bpk-mixins/forms';
+@import '~@skyscanner/backpack-web/bpk-mixins/shadows';
+@import '~@skyscanner/backpack-web/bpk-mixins/type';
+@import '~@skyscanner/backpack-web/bpk-mixins/utils';
+@import '~@skyscanner/backpack-web/bpk-tokens/tokens.scss';
+
+.App {
+  text-align: center;
+  background-color: var(--bpk-color-gray50);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.App__main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--bpk-spacing-lg);
+}
+
+.App__title {
+  @include bpk-heading-xl;
+  color: var(--bpk-color-gray700);
+  margin-bottom: var(--bpk-spacing-lg);
+}
+
+.App__calendar-container {
+  margin-bottom: var(--bpk-spacing-xl);
+  border-radius: var(--bpk-border-radius-sm);
+  overflow: hidden; // Ensures calendar corners are rounded
+  box-shadow: var(--bpk-shadow-lg); // Adds a subtle shadow
+  background-color: var(--bpk-color-white);
+}
+
+.App__button-container {
+  margin-top: var(--bpk-spacing-xl);
+}
+
+.App__selected-date {
+  @include bpk-text-sm;
+  margin-top: var(--bpk-spacing-lg);
+  color: var(--bpk-color-gray700);
+}
